@@ -1,0 +1,57 @@
+<html>
+
+<head>
+<style>
+cache
+{
+	display:none;
+}
+#e::before
+{
+	content:"NEW DATA 1";
+}
+#f::before
+{
+	content:"NEW DATA 2";
+}
+</style>
+</head>
+
+<body>
+<cache>{"#a":"style=background-color:red;","#b":"style=color:red;","#c":"style=font-weight:bold;","#d":"style=background-color:red;",".a":"style=background-color:teal;"}</cache>
+<div id="a">Newly added data 1</div>
+<div id="b">Newly added data 2</div>
+<div id="c"><span style="display:none;background:red;">SUCCESSFUL</span><span style="display:DISP_FAIL_1;background:red;">FAILED</span></div>
+<div id="d"><span style="display:;background:red;">GOOD</span><span style="display:none;background:red;">BAD</span></div></div>
+<div class="a">or</div>
+<div class="a">trip</div>
+<div class="a">as</div>
+<div id="e" class="a"></div>
+<div id="f" class="a"></div>
+
+<script>
+document.body.onload = function(){
+var data=document.getElementsByTagName("cache")[0].firstChild.textContent;
+var json_data=JSON.parse(data);
+var x,y;
+for (x in json_data)
+{
+	var part=json_data[x].split("=")[0];
+	var val=json_data[x].replace(part+"=","")
+	if(document.querySelectorAll(x).length === 1)
+	{
+		document.querySelector(x).setAttribute(json_data[x].split("=")[0],val);
+	}
+	else if(document.querySelectorAll(x).length > 1)
+	{
+		for (var y=0;y<document.querySelectorAll(".a").length;y++)
+		{
+			document.querySelectorAll(".a")[y].setAttribute(json_data[x].split("=")[0],val);
+		}
+	}
+}
+}
+</script>
+</body>
+
+</html>
