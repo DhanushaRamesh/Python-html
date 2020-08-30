@@ -1,4 +1,4 @@
-f=open("test_placeholder.html","r")
+f=open("test.html","r")
 data=f.read()
 f.close()
 
@@ -83,7 +83,7 @@ data=data.replace("</body>",cbody)
 
 #CLIENT SIDE PROCESSING END
 
-f=open("test_placeholder_new.html","w+")
+f=open("output.html","w+")
 f.write(data)
 f.close()
 
